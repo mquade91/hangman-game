@@ -23,8 +23,8 @@ const Hangman = () => {
     setGuessList([]);
   };
 
-  const divStyles = {
-    border: '2px solid #1547aa',
+  const letterStyle = {
+    borderBottom: '2px solid',
     width: 25,
     margin: 3,
     height: 20,
@@ -37,11 +37,12 @@ const Hangman = () => {
   };
 
   return (
-    <div>
+    <>
+      <div>
       <div style={containerStyle}>
         {arrayOfWord.map((letter) => {
           return (
-            <div style={divStyles}>
+            <div style={letterStyle}>
               {guessList.includes(letter) ? letter : ''}
             </div>
           );
@@ -50,7 +51,7 @@ const Hangman = () => {
       {tries > 0 && <input id="guess-input" onChange={handleChange}></input>}
       <button disabled={tries === 0} onClick={() => checkValue()}>
         {' '}
-        {tries > 0 ? 'Try' : 'game over'}{' '}
+        {tries > 0 ? 'Try' : 'Game over'}{' '}
       </button>
       <div>Tries left: {tries}</div>
       <div style={containerStyle}>
@@ -59,9 +60,10 @@ const Hangman = () => {
           return <div>{`${letter}, `}</div>;
         })}
       </div>
-
       <button onClick={() => resetValue()}>Reset game</button>
     </div>
+    </>
+  
   );
 };
 
