@@ -1,0 +1,10 @@
+{  
+    "compilerOptions": {    
+        "lib": ["dom", "dom.iterable", "esnext"],    
+        "target": "ES5",    
+        "types": ["vite/client"],
+        "isolatedModules": true,
+        "module": "Node16",
+        "moduleResolution": "node16"
+    },
+ }
