@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import React, { useState } from 'react';
 
-const Hangman = () => {
-  const word = 'hangman';
+const Hangman = ({words = []}) => {
+  const word = words[0] ? words[0]: '';
   const arrayOfWord = word.split('');
   const [tries, setTries] = useState(5);
   const [guessList, setGuessList] = useState([]);

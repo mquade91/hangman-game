@@ -1,23 +1,33 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import './App.css';
 import Hangman from './components/Hangman';
 
 function App() {
 
+  const [words, setWords] = useState([])
+  const [loading, setLoading] = useState(false);
+
   const fetchWordsAPI = async () => {
-    const response = await axios.get("http://localhost:8080/api")
-    console.log(response.data.words)
+    setLoading(true)
+    try{
+      const response = await axios.get("http://localhost:8080/api")
+      setWords(response.data.words)
+      console.log(response.data.words)
+    } finally{
+      setLoading(false)
+    }
   }
 
   useEffect(() =>{
     fetchWordsAPI()
   }, [])
-
+  if(loading) {
+    return 'loading...'
+  }
   return (
     <div className="App">
-
-       <Hangman />      
+       <Hangman words={words} />      
     </div>
   );
 }
