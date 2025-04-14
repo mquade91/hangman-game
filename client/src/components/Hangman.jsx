@@ -40,9 +40,9 @@ const Hangman = () => {
     <>
       <div>
       <div style={containerStyle}>
-        {arrayOfWord.map((letter) => {
+        {arrayOfWord.map((letter, index) => {
           return (
-            <div style={letterStyle}>
+            <div key={`guess${letter}${index}`} style={letterStyle}>
               {guessList.includes(letter) ? letter : ''}
             </div>
           );
@@ -56,8 +56,8 @@ const Hangman = () => {
       <div>Tries left: {tries}</div>
       <div style={containerStyle}>
         Previous Guesses: 
-        {guessList.map((letter) => {
-          return <div>{`${letter}, `}</div>;
+        {guessList.map((letter, index) => {
+          return <div key={`${index + letter}`}>{`${letter}, `}</div>;
         })}
       </div>
       <button onClick={() => resetValue()}>Reset game</button>
