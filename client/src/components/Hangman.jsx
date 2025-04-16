@@ -24,13 +24,6 @@ const Hangman = ({words = []}) => {
     setGuessList([]);
   };
 
-  const letterStyle = {
-    borderBottom: '2px solid',
-    width: 25,
-    margin: 3,
-    height: 20,
-  };
-
   return (
       <>
         <div className='container'>
