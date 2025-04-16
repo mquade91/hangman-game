@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import React, { useState } from 'react';
+import '../App.css'
 
 const Hangman = ({words = []}) => {
   const word = words[0] ? words[0]: '';
@@ -30,38 +31,30 @@ const Hangman = ({words = []}) => {
     height: 20,
   };
 
-  const containerStyle = {
-    display: 'flex',
-    margin: 20,
-    justifyContent: 'center',
-  };
-
   return (
-    <>
-      <div>
-      <div style={containerStyle}>
-        {arrayOfWord.map((letter, index) => {
-          return (
-            <div key={`guess${letter}${index}`} style={letterStyle}>
-              {guessList.includes(letter) ? letter : ''}
-            </div>
-          );
-        })}
-      </div>
-      {tries > 0 && <input id="guess-input" onChange={handleChange}></input>}
-      <button disabled={tries === 0} onClick={() => checkValue()}>
+      <>
+        <div className='container'>
+          {arrayOfWord.map((letter, index) => {
+            return (
+              <div key={`guess${letter}${index}`} className='letter' >
+                {guessList.includes(letter) ? letter : ''}
+              </div>
+            );
+          })}
+        </div>
+        {tries > 0 && <input id="guess-input" onChange={handleChange}></input>}
+        <button disabled={tries === 0} onClick={() => checkValue()}>
         {' '}
-        {tries > 0 ? 'Try' : 'Game over'}{' '}
-      </button>
-      <div>Tries left: {tries}</div>
-      <div style={containerStyle}>
-        Previous Guesses: 
-        {guessList.map((letter, index) => {
-          return <div key={`${index + letter}`}>{`${letter}, `}</div>;
-        })}
-      </div>
+          {tries > 0 ? 'Try' : 'Game over'}{' '}
+        </button>
+        <p>Tries left: {tries}</p>
+        <p className='container'>
+          Previous Guesses: 
+         {guessList.map((letter, index) => {
+            return <div key={`${index + letter}`}>{`${letter}, `}</div>;
+         })}
+      </p>
       <button onClick={() => resetValue()}>Reset game</button>
-    </div>
     </>
   
   );
