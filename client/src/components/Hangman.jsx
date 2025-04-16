@@ -27,13 +27,15 @@ const Hangman = ({words = []}) => {
   return (
       <>
         <div className='container'>
-          {arrayOfWord.map((letter, index) => {
+          {words.length > 2 ? 
+          arrayOfWord.map((letter, index) => {
             return (
               <div key={`guess${letter}${index}`} className='letter' >
                 {guessList.includes(letter) ? letter : ''}
               </div>
             );
-          })}
+          }) : <p>No Words</p>
+        }
         </div>
         {tries > 0 && <input id="guess-input" onChange={handleChange}></input>}
         <button disabled={tries === 0} onClick={() => checkValue()}>
