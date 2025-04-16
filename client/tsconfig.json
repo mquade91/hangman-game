@@ -1,5 +1,6 @@
 {  
-    "compilerOptions": {    
+    "compilerOptions": {
+        "jsx": "react",    
         "lib": ["dom", "dom.iterable", "esnext"],    
         "target": "ES5",    
         "types": ["vite/client"],

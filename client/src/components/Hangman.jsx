@@ -1,16 +1,19 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import React, { useState } from 'react';
+import Gallows from './Gallows'
 import '../App.css'
 
 const Hangman = ({words = []}) => {
-  const word = words[0] ? words[0]: '';
+  const word = words[0] ? words[0]: 'word';
   const arrayOfWord = word.split('');
-  const [tries, setTries] = useState(5);
+  const [tries, setTries] = useState(7);
   const [guessList, setGuessList] = useState([]);
   const [currentGuess, setCurrentGuess] = useState('');
 
   const checkValue = () => {
-    setTries(tries - 1);
+    if(!arrayOfWord.includes(currentGuess)) {
+      setTries(tries - 1);
+    }
     guessList.push(currentGuess);
     // @ts-ignore
     document.getElementById('guess-input').value = '';
@@ -26,15 +29,16 @@ const Hangman = ({words = []}) => {
 
   return (
       <>
+        <Gallows tries={guessList.length} />
         <div className='container'>
-          {words.length > 2 ? 
+          {arrayOfWord.length > 1 ? 
           arrayOfWord.map((letter, index) => {
             return (
               <div key={`guess${letter}${index}`} className='letter' >
                 {guessList.includes(letter) ? letter : ''}
               </div>
             );
-          }) : <p>No Words</p>
+          }) : <p> here{words[0]}</p>
         }
         </div>
         {tries > 0 && <input id="guess-input" onChange={handleChange}></input>}
@@ -42,7 +46,7 @@ const Hangman = ({words = []}) => {
         {' '}
           {tries > 0 ? 'Try' : 'Game over'}{' '}
         </button>
-        <p>Tries left: {tries}</p>
+        <p>Guesses left: {tries}</p>
         <p className='container'>
           Previous Guesses: 
          {guessList.map((letter, index) => {
