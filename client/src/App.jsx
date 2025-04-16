@@ -14,6 +14,18 @@ function App() {
       const response = await axios.get("http://localhost:8080/api")
       setWords(response.data.words)
       console.log(response.data.words)
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        // Axios-specific error
+        console.error('Axios error:', error.message);
+        if (error.response) {
+          console.error('Response data:', error.response.data);
+          console.error('Status:', error.response.status);
+        }
+      } else {
+        // Non-Axios error (e.g., coding error)
+        console.error('Unexpected error:', error);
+      }
     } finally{
       setLoading(false)
     }
