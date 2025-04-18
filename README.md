@@ -1,4 +1,6 @@
-# Over engineered Hangman game using react
+# Over engineered Hangman game using react & AWS Amplify
+
+- [Deployed via AWS Amplify here](https://master.dr7v6489vrmgm.amplifyapp.com/)
 
 ## Available Scripts
 
@@ -24,4 +26,3 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 # Possible Future enhancements
 ### Add unit testing
-### Deploy to AWS
