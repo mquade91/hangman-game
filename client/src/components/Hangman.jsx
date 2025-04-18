@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import React, { useEffect, useState } from 'react';
-// import Gallows from '../components/Gallows'
+import ErrorField from '../components/ErrorField'
 import '../App.css'
 
 const Hangman = ({words = []}) => {
@@ -9,19 +9,31 @@ const Hangman = ({words = []}) => {
   const [tries, setTries] = useState(7);
   const [guessList, setGuessList] = useState([]);
   const [currentGuess, setCurrentGuess] = useState('');
+  const [error, setError] = useState('')
 
   const checkValue = () => {
-    if(!guessList.includes(currentGuess)) {
-      setGuessList([...guessList, currentGuess]);
-      setTries(tries - 1)
-    } else {
-      alert(`You already guessed letter ${currentGuess}`)
+    if(currentGuess && currentGuess !== '') {
+      const hasNotBeenGuessed = !guessList.includes(currentGuess)
+      if(hasNotBeenGuessed) {
+        setGuessList([...guessList, currentGuess]);
+        setTries(tries - 1)
+      } else {
+        setError(`You already guessed letter ${currentGuess}`)
+      }
+    } else if(currentGuess === '') {
+      setError('You need to enter a letter')
     }
+    setCurrentGuess('')
     // @ts-ignore
     document.getElementById('guess-input').value = '';
   };
+
   const handleChange = (e) => {
-    setCurrentGuess(e.target.value.toUpperCase());
+    const inputValue = e.target.value.toUpperCase();
+    setError('')
+    if(inputValue && inputValue !== '') {
+      setCurrentGuess(inputValue);
+    }
   };
 
   const resetValue = () => {
@@ -29,34 +41,36 @@ const Hangman = ({words = []}) => {
     setGuessList([]);
   };
 
+  const buttonText = () => tries > 0 ? 'Try' : 'Game over'
+
   return (
-      <>
-        {/* <Gallows tries={guessList.length} /> */}
+      <div className='container'>
         <h1>Hangman</h1>
-        <div className='container'>
+        <h4>Hint: 'Name of the game'</h4>
+        <div className='correct-container'>
           {arrayOfWord.map((letter, index) => {
-            return (
-              <div key={`guess${letter}${index}`} className='correct-letter' >
-                {guessList.includes(letter) ? letter : ''}
-              </div>
-            );})
+              return (
+                <div key={`guess${letter}${index}`} className='correct-letter' >
+                  {guessList.includes(letter) ? letter : ''}
+                </div>
+              );
+            })
           }
         </div>
-        {tries > 0 && <input maxLength={1} id="guess-input" onChange={handleChange}></input>}
+        <span>Guesses left: {tries}</span>
+         <span> Previous Guesses: </span> 
+         <div className='correct-container'>
+          {guessList.map((letter, index) => {
+              return <span className='guessed-letter' key={`${index + letter}`}>{`${letter},`}</span>;
+          })}
+         </div>
+        <input maxLength={1} id="guess-input" onChange={handleChange}></input>
+        {error && error !== '' && <ErrorField errorMessage={error}/>}
         <button disabled={tries === 0} onClick={() => checkValue()}>
-        {' '}
-          {tries > 0 ? 'Try' : 'Game over'}{' '}
+          {buttonText()}
         </button>
-        <p>Guesses left: {tries}</p>
-        <div className='container'>
-          Previous Guesses: 
-         {guessList.map((letter, index) => {
-            return <div key={`${index + letter}`}>{` ${letter}, `}</div>;
-         })}
-      </div>
       <button onClick={() => resetValue()}>Reset game</button>
-    </>
-  
+    </div>
   );
 };
 
