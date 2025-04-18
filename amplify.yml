@@ -1,6 +1,6 @@
 version: 1
 applications:
-  - appRoot: client
+  - appRoot: hangman-game/client
     frontend:
       phases:
         preBuild:
