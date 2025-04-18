@@ -1,15 +1,15 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import React, { useEffect, useState } from 'react';
-import ErrorField from '../components/ErrorField'
+import ErrorField from './ErrorField'
 import '../App.css'
 
 const Hangman = ({words = []}) => {
   const word = 'hangman';
   const arrayOfWord = word.toUpperCase().split('');
-  const [tries, setTries] = useState(7);
-  const [guessList, setGuessList] = useState([]);
-  const [currentGuess, setCurrentGuess] = useState('');
-  const [error, setError] = useState('')
+  const [tries, setTries] = useState<number>(7);
+  const [guessList, setGuessList] = useState<string[]>([]);
+  const [currentGuess, setCurrentGuess] = useState<string>('');
+  const [error, setError] = useState<string>('')
 
   const checkValue = () => {
     if(currentGuess && currentGuess !== '') {
@@ -28,7 +28,7 @@ const Hangman = ({words = []}) => {
     document.getElementById('guess-input').value = '';
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value.toUpperCase();
     setError('')
     if(inputValue && inputValue !== '') {
