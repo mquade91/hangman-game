@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import React, { useState } from 'react';
-import Gallows from './Gallows'
+// import Gallows from '../components/Gallows'
 import '../App.css'
 
 const Hangman = ({words = []}) => {
@@ -29,7 +29,7 @@ const Hangman = ({words = []}) => {
 
   return (
       <>
-        <Gallows tries={guessList.length} />
+        {/* <Gallows tries={guessList.length} /> */}
         <div className='container'>
           {arrayOfWord.length > 1 ? 
           arrayOfWord.map((letter, index) => {
