@@ -1,4 +1,4 @@
-# Over engineered Hangman game using react & AWS Amplify
+# Over engineered Hangman game using React, Typescript & AWS Amplify
 
 - [Deployed via AWS Amplify here](https://master.dr7v6489vrmgm.amplifyapp.com/)
 
