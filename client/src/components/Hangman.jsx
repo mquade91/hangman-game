@@ -10,8 +10,6 @@ const Hangman = ({words = []}) => {
   const [guessList, setGuessList] = useState([]);
   const [currentGuess, setCurrentGuess] = useState('');
 
-  console.log(arrayOfWord)
-
   const checkValue = () => {
     if(!guessList.includes(currentGuess)) {
       setGuessList([...guessList, currentGuess]);
@@ -19,7 +17,6 @@ const Hangman = ({words = []}) => {
     } else {
       alert(`You already guessed letter ${currentGuess}`)
     }
-    console.log(guessList)
     // @ts-ignore
     document.getElementById('guess-input').value = '';
   };
