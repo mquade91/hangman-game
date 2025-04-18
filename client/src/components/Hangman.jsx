@@ -4,34 +4,34 @@ import React, { useState } from 'react';
 import '../App.css'
 
 const Hangman = ({words = []}) => {
-  const word = words[0] ? words[0]: 'word';
+  const word = 'hangman';
   const arrayOfWord = word.split('');
   const [tries, setTries] = useState(7);
   const [guessList, setGuessList] = useState([]);
   const [currentGuess, setCurrentGuess] = useState('');
 
   const checkValue = () => {
-    if(!arrayOfWord.includes(currentGuess)) {
-      setTries(tries - 1);
-    }
-    guessList.push(currentGuess);
+    setGuessList([...guessList, currentGuess]);
     // @ts-ignore
     document.getElementById('guess-input').value = '';
   };
   const handleChange = (e) => {
+    console.log(e.target.value.toLowerCase())
     setCurrentGuess(e.target.value.toLowerCase());
   };
 
   const resetValue = () => {
-    setTries(5);
+    setTries(7);
     setGuessList([]);
   };
 
   return (
       <>
         {/* <Gallows tries={guessList.length} /> */}
+        <h1>Hangman</h1>
         <div className='container'>
-          {arrayOfWord.length > 1 ? 
+
+        {arrayOfWord.length > 1 ? 
           arrayOfWord.map((letter, index) => {
             return (
               <div key={`guess${letter}${index}`} className='letter' >
@@ -40,6 +40,7 @@ const Hangman = ({words = []}) => {
             );
           }) : <p> here{words[0]}</p>
         }
+
         </div>
         {tries > 0 && <input id="guess-input" onChange={handleChange}></input>}
         <button disabled={tries === 0} onClick={() => checkValue()}>
@@ -47,12 +48,12 @@ const Hangman = ({words = []}) => {
           {tries > 0 ? 'Try' : 'Game over'}{' '}
         </button>
         <p>Guesses left: {tries}</p>
-        <p className='container'>
+        <div className='container'>
           Previous Guesses: 
          {guessList.map((letter, index) => {
             return <div key={`${index + letter}`}>{`${letter}, `}</div>;
          })}
-      </p>
+      </div>
       <button onClick={() => resetValue()}>Reset game</button>
     </>
   
