@@ -16,4 +16,4 @@ applications:
                     - '**/*'
             cache:
                 paths: []
-        appRoot: /client
+        appRoot: 'hangman/client'
