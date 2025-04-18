@@ -18,15 +18,30 @@
 }
 
 button {
-  margin-right: 25px;
-  margin-left: 10px;
+  display: inline-block;
+  padding: 14px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #000000;
+  background-color: #0ed1ce;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  width: 100%;
+  max-width: 300px;
+  box-sizing: border-box;
+  transition: background-color 0.3s ease;
 }
+
+
 
 .container {
   display: flex
 }
 
-.letter {
+.correct-letter {
   border-bottom: solid;
   width: 25px;
   margin: 3px;

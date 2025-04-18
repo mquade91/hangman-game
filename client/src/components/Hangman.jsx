@@ -36,13 +36,13 @@ const Hangman = ({words = []}) => {
         <div className='container'>
           {arrayOfWord.map((letter, index) => {
             return (
-              <div key={`guess${letter}${index}`} className='letter' >
+              <div key={`guess${letter}${index}`} className='correct-letter' >
                 {guessList.includes(letter) ? letter : ''}
               </div>
             );})
           }
         </div>
-        {tries > 0 && <input id="guess-input" onChange={handleChange}></input>}
+        {tries > 0 && <input maxLength={1} id="guess-input" onChange={handleChange}></input>}
         <button disabled={tries === 0} onClick={() => checkValue()}>
         {' '}
           {tries > 0 ? 'Try' : 'Game over'}{' '}
