@@ -1,11 +1,19 @@
 {  
     "compilerOptions": {
-        "jsx": "react",    
-        "lib": ["dom", "dom.iterable", "esnext"],    
-        "target": "ES5",    
-        "types": ["vite/client"],
+        "target": "ESNext",
+        "lib": ["DOM", "DOM.Iterable", "ESNext"],
+        "jsx": "react-jsx",
+        "module": "ESNext",
+        "moduleResolution": "Node",
+        "allowJs": true,
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "strict": true,
+        "forceConsistentCasingInFileNames": true,
+        "noEmit": true,
         "isolatedModules": true,
-        "module": "Node16",
-        "moduleResolution": "node16"
+        "resolveJsonModule": true
     },
+    "include": ["src"]
  }
