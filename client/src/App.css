@@ -51,6 +51,7 @@ button {
 
 input {
   width: 100%;
+  font-size: 16px;
 }
 
 .correct-container {

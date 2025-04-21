@@ -4,9 +4,8 @@ import './App.css';
 import Hangman from './components/Hangman';
 
 function App() {
-
-  const [words, setWords] = useState([])
-  const [loading, setLoading] = useState(false);
+  const [words, setWords] = useState<string[]>([])
+  const [loading, setLoading] = useState<boolean>(false);
 
   // const fetchWordsAPI = async () => {
   //   setLoading(true)
