@@ -1,9 +1,13 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import React, { useEffect, useState } from 'react';
 import ErrorField from './ErrorField'
-import '../App.css'
+import '../styles/App.css'
 
-const Hangman = ({words = []}) => {
+type HangmanProps = {
+  words: string[];
+};
+
+const Hangman = ({words = []}: HangmanProps) => {
   const word = 'hangman';
   const arrayOfWord = word.toUpperCase().split('');
   const [tries, setTries] = useState<number>(7);
@@ -39,6 +43,7 @@ const Hangman = ({words = []}) => {
   const resetValue = () => {
     setTries(7);
     setGuessList([]);
+    setError('')
   };
 
   const buttonText = () => tries > 0 ? 'Try' : 'Game over'

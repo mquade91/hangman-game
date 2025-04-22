@@ -1,0 +1,85 @@
+:root {
+  --sand: #fceabb;
+  --sea: #a2d4f4;
+  --ocean: #0093d1;
+  --sunset: #ff9966;
+  --sun: #ffe259;
+  --shell: #f4e2d8;
+  --text: #333;
+}
+
+body {
+  margin: 0px;
+}
+
+h1 {
+  color: var(--sunset);
+  margin-bottom: 1rem;
+}
+
+.App {
+  background: linear-gradient(to bottom, var(--sea), var(--sand));
+  color: var(--text);
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.container {
+  font-family: 'Segoe UI', sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-size: 16px;
+  font-weight: 600;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  max-width: 1000px;
+}
+
+button {
+  background-color: var(--ocean);
+  color: white;
+  border: none;
+  font-weight: 600;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  width: 100%;
+}
+
+input {
+  width: 100%;
+  font-size: 16px;
+}
+
+.correct-container {
+  display:flex;
+  justify-content: center;
+ 
+}
+.correct-letter {
+  width: 40px;
+  margin-right: 10px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  border-bottom: 3px solid #333;
+  color: #333;
+  user-select: none;
+}
+
+.guessed-letter {
+  width: 40px;
+  margin-right: 10px;
+  color: var(--text);
+  user-select: none;
+}
+
