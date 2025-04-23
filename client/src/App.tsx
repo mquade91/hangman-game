@@ -4,41 +4,28 @@ import './styles/App.css';
 import Hangman from './components/Hangman';
 
 function App() {
-  const [words, setWords] = useState<string[]>([])
+  const [games, setGames] = useState<object[]>([])
   const [loading, setLoading] = useState<boolean>(false);
 
-  // const fetchWordsAPI = async () => {
-  //   setLoading(true)
-  //   try{
-  //     const response = await axios.get("http://localhost:8080/api")
-  //     setWords(response.data.words)
-  //     console.log(response.data.words)
-  //   } catch (error) {
-  //     if (axios.isAxiosError(error)) {
-  //       // Axios-specific error
-  //       console.error('Axios error:', error.message);
-  //       if (error.response) {
-  //         console.error('Response data:', error.response.data);
-  //         console.error('Status:', error.response.status);
-  //       }
-  //     } else {
-  //       // Non-Axios error (e.g., coding error)
-  //       console.error('Unexpected error:', error);
-  //     }
-  //   } finally{
-  //     setLoading(false)
-  //   }
-  // }
 
-  // useEffect(() =>{
-  //   fetchWordsAPI()
-  // }, [])
-  if(loading) {
-    return 'loading...'
-  }
+  useEffect(() => {
+    axios.get('https://rr5zhoav94.execute-api.us-east-1.amazonaws.com/production/game', {
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': import.meta.env.VITE_API_KEY
+      }
+    })
+      .then(response => {
+        console.log(response); // assuming your lambda returns { message: "..." }
+      })
+      .catch(error => {
+        console.error('Error calling Lambda function:', error);
+      });
+  }, []);
+
   return (
     <div className="App">
-       <Hangman words={words} />      
+       <Hangman words={[]} />      
     </div>
   );
 }
