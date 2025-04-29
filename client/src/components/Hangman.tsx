@@ -3,11 +3,15 @@ import React, { useEffect, useState } from 'react';
 import ErrorField from './ErrorField'
 import '../styles/App.css'
 
+type Game = {
+  game?: string;
+}
+
 type HangmanProps = {
-  words: string[];
+  gameConfig?: Game;
 };
 
-const Hangman = ({words = []}: HangmanProps) => {
+const Hangman = ({gameConfig = {}}: HangmanProps) => {
   const word = 'hangman';
   const arrayOfWord = word.toUpperCase().split('');
   const [tries, setTries] = useState<number>(7);
@@ -46,11 +50,11 @@ const Hangman = ({words = []}: HangmanProps) => {
     setError('')
   };
 
-  const buttonText = () => tries > 0 ? 'Try' : 'Game over'
+  const getText = () => tries > 0 ? 'Try' : 'Game over'
 
   return (
-      <div className='container'>
-        <h1>Hangman</h1>
+    <>
+        <h1>{gameConfig.game}</h1>
         <h4>Hint: 'Name of the game'</h4>
         <div className='correct-container'>
           {arrayOfWord.map((letter, index) => {
@@ -71,11 +75,13 @@ const Hangman = ({words = []}: HangmanProps) => {
          </div>
         <input maxLength={1} id="guess-input" onChange={handleChange}></input>
         {error && error !== '' && <ErrorField errorMessage={error}/>}
-        <button disabled={tries === 0} onClick={() => checkValue()}>
-          {buttonText()}
-        </button>
+        {tries > 0 ? (
+            <button disabled={tries === 0} onClick={() => checkValue()}>Try</button>
+        ) : (
+          <p>Game Over</p>
+        )}  
       <button onClick={() => resetValue()}>Reset game</button>
-    </div>
+    </>
   );
 };
 
