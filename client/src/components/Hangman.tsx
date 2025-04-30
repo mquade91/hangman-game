@@ -2,16 +2,13 @@
 import React, { useEffect, useState } from 'react';
 import ErrorField from './ErrorField'
 import '../styles/App.css'
-
-type Game = {
-  game?: string;
-}
+import { Game } from '../types'
 
 type HangmanProps = {
-  gameConfig?: Game;
+  gameConfig: Game;
 };
 
-const Hangman = ({gameConfig = {}}: HangmanProps) => {
+const Hangman = ({gameConfig}: HangmanProps) => {
   const word = 'hangman';
   const arrayOfWord = word.toUpperCase().split('');
   const [tries, setTries] = useState<number>(7);
@@ -50,9 +47,11 @@ const Hangman = ({gameConfig = {}}: HangmanProps) => {
     setError('')
   };
 
+
   return (
     <>
         <h1>{gameConfig.game}</h1>
+        <h3>{gameConfig.description}</h3>
         <h4>Hint: 'Name of the game'</h4>
         <div className='correct-container'>
           {arrayOfWord.map((letter, index) => {
