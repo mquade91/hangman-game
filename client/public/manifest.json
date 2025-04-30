@@ -1,6 +1,6 @@
 {
-  "short_name": "Hangmanc Game",
-  "name": "Hangman Game",
+  "short_name": "Game",
+  "name": "Games",
   "icons": [],
   "start_url": ".",
   "display": "standalone",
