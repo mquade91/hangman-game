@@ -1,4 +1,4 @@
-# Over engineered Hangman game using React, Typescript & AWS Amplify
+# Over engineered Hangman game using React, Typescript, AWS Amplify, AWS Lambda, AWS DynamoDB
 
 - [Deployed via AWS Amplify here](https://master.dr7v6489vrmgm.amplifyapp.com/)
 
@@ -18,12 +18,3 @@ You may also see any lint errors in the console.
 
 Builds the app for production to the `dist` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-# Possible Future enhancements
-- Add unit testing
-- 
