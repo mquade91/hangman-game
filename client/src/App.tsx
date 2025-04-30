@@ -19,11 +19,9 @@ function App() {
         'Content-Type': 'application/json',
         'x-api-key': import.meta.env.VITE_API_KEY
       }
-    })
-      .then(response => {
+    }).then(response => {
         console.log(response); // assuming your lambda returns { message: "..." }
         setGames(response.data)
-
       })
       .catch(error => {
         console.error('Error calling Lambda function:', error);
