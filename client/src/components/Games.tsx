@@ -1,8 +1,6 @@
 import Hangman from './Hangman';
+import { Game } from '../types';
 
-type Game = {
-  game: string;
-}
 type GamesProps = {
   games: Game[]
 }

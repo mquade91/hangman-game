@@ -50,8 +50,6 @@ const Hangman = ({gameConfig = {}}: HangmanProps) => {
     setError('')
   };
 
-  const getText = () => tries > 0 ? 'Try' : 'Game over'
-
   return (
     <>
         <h1>{gameConfig.game}</h1>

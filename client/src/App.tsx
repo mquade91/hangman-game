@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+
 import './styles/App.css';
+import { Game } from './types'
 import ErrorField from './components/ErrorField';
 import Games from './components/Games';
 
-type Game = {
-  game: string;
-}
+
 
 function App() {
   const [games, setGames] = useState<Game[]>([])
