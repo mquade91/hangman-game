@@ -13,12 +13,12 @@ body {
 }
 
 h1 {
-  color: var(--sunset);
+  color: var(--text);
   margin-bottom: 1rem;
 }
 
 .App {
-  background: linear-gradient(to bottom, var(--sea), var(--sand));
+  background: linear-gradient(to bottom, var(--sea), var(--sunset));
   color: var(--text);
   display: flex;
   justify-content: center;
