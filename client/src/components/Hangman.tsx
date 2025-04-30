@@ -19,14 +19,20 @@ const Hangman = ({gameConfig}: HangmanProps) => {
   const checkValue = () => {
     if(currentGuess && currentGuess !== '') {
       const hasNotBeenGuessed = !guessList.includes(currentGuess)
-      if(hasNotBeenGuessed) {
-        setGuessList([...guessList, currentGuess]);
-        setTries(tries - 1)
+      const isLetter = /^[A-Za-z ]*$/.test(currentGuess)
+
+      if (!isLetter) {
+        setError('You need to enter a letter')
       } else {
-        setError(`You already guessed letter ${currentGuess}`)
+        if(hasNotBeenGuessed) {
+          setGuessList([...guessList, currentGuess]);
+          setTries(tries - 1)
+        } else {
+          setError(`You already guessed letter ${currentGuess}`)
+        }
       }
     } else if(currentGuess === '') {
-      setError('You need to enter a letter')
+      setError('Your guess can not be blank')
     }
     setCurrentGuess('')
     // @ts-ignore
@@ -70,7 +76,7 @@ const Hangman = ({gameConfig}: HangmanProps) => {
               return <span className='guessed-letter' key={`${index + letter}`}>{`${letter},`}</span>;
           })}
          </div>
-        <input maxLength={1} id="guess-input" onChange={handleChange}></input>
+        <input pattern="[A-Za-z]+" maxLength={1} id="guess-input" onChange={handleChange}></input>
         {error && error !== '' && <ErrorField errorMessage={error}/>}
         {tries > 0 ? (
             <button disabled={tries === 0} onClick={() => checkValue()}>Try</button>
