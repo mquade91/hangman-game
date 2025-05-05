@@ -1,4 +1,5 @@
 import Hangman from './Hangman';
+import TicTacToe from './TicTacToe';
 import { Game } from '../types';
 
 type GamesProps = {
@@ -8,11 +9,19 @@ type GamesProps = {
 const Games = ({games = []}: GamesProps) => {
 
   const hangmanConfig = games.find(singleGame => singleGame.game === 'Hangman');
+  const showTicTacToe = true;
 
   return (
+    <>
     <div className='container'>
-      {hangmanConfig && <Hangman gameConfig={hangmanConfig} />   }   
+    <h1>Games</h1>
+      {hangmanConfig && <button>Hangman</button>}
+      {showTicTacToe && <button>Tic Tac Toe</button>}
+      {/* {hangmanConfig && <Hangman gameConfig={hangmanConfig} />   }    */}
+      <TicTacToe/>
     </div>
+    </>
+
   )
 }
 
