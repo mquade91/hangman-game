@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import Hangman from './Hangman';
+import TicTacToe from './TicTacToe';
 import { Game } from '../types';
 
 type GamesProps = {
@@ -7,12 +9,30 @@ type GamesProps = {
 
 const Games = ({games = []}: GamesProps) => {
 
-  const hangmanConfig = games.find(singleGame => singleGame.game === 'Hangman');
+  const [page, setPage] = useState<string>('');
+
+  const renderPage = () => {
+    switch (page) {
+      case 'hangman':
+        return <Hangman />;
+      case 'tictactoe':
+        return <TicTacToe />;
+      default:
+        return <p>Choose a game to play</p>;
+    }
+  };
 
   return (
-    <div className='container'>
-      {hangmanConfig && <Hangman gameConfig={hangmanConfig} />   }   
-    </div>
+    <>
+      <h1>Games</h1>
+      {page === '' ? (
+          <>
+  <button onClick={() => setPage('hangman')}>Hangman</button>
+  <button onClick={() => setPage('tictactoe')}>Tic Tac Toe</button>
+          </>
+      ): (<button onClick={() => setPage('')}>Choose a different Game</button>)}
+      {renderPage()}
+    </>
   )
 }
 

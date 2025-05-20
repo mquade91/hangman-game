@@ -8,7 +8,7 @@ type HangmanProps = {
   gameConfig: Game;
 };
 
-const Hangman = ({gameConfig}: HangmanProps) => {
+const Hangman = () => {
   const word = 'hangman';
   const arrayOfWord = word.toUpperCase().split('');
   const [tries, setTries] = useState<number>(7);
@@ -56,8 +56,7 @@ const Hangman = ({gameConfig}: HangmanProps) => {
 
   return (
     <>
-        <h1>{gameConfig.game}</h1>
-        <h3>{gameConfig.description}</h3>
+        <h1>Hangman</h1>
         <h4>Hint: 'Name of the game'</h4>
         <div className='correct-container'>
           {arrayOfWord.map((letter, index) => {
