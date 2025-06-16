@@ -4,7 +4,6 @@
   "private": true,
   "dependencies": {
     "@testing-library/dom": "^10.4.0",
-    "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.2.0",
     "@testing-library/user-event": "^13.5.0",
     "@vitejs/plugin-react": "^4.3.4",
@@ -19,7 +18,8 @@
   "scripts": {
     "start": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "jest"
   },
   "eslintConfig": {
     "extends": [
@@ -42,13 +42,18 @@
   "devDependencies": {
     "@aws-amplify/backend": "^1.15.0",
     "@aws-amplify/backend-cli": "^1.5.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@types/jest": "^30.0.0",
     "@types/node": "^22.14.1",
     "@types/react": "^19.1.2",
     "aws-cdk": "^2.1003.0",
     "aws-cdk-lib": "^2.180.0",
     "constructs": "^10.4.2",
     "esbuild": "^0.25.2",
+    "jest": "^30.0.0",
+    "jest-environment-jsdom": "^30.0.0",
     "prettier": "^3.5.3",
+    "ts-jest": "^29.4.0",
     "tsx": "^4.19.3",
     "typescript": "^5.8.3"
   }
