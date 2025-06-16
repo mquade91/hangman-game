@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-
 import './styles/App.css';
 import { Game } from './types';
 import ErrorField from './components/ErrorField';
 import Games from './components/Games';
+import { fetchGames } from './api/gameApi';
 
 function App() {
   const [games, setGames] = useState<Game[]>([]);
@@ -12,24 +12,20 @@ function App() {
   const [error, setError] = useState<string>('');
 
   useEffect(() => {
-    axios
-      .get(
-        'https://rr5zhoav94.execute-api.us-east-1.amazonaws.com/production/game',
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            'x-api-key': import.meta.env.VITE_API_KEY,
-          },
-        }
-      )
-      .then((response) => {
-        console.log(response); // assuming your lambda returns { message: "..." }
-        setGames(response.data);
-      })
-      .catch((error) => {
-        console.error('Error calling Lambda function:', error);
-        setError(`Error calling Lambda function: ${error.message}`);
-      });
+    const loadGames = async () => {
+      setLoading(true);
+      try {
+        const gamesData = await fetchGames();
+        setGames(gamesData);
+      } catch (error: any) {
+        console.error(error.message);
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadGames();
   }, []);
 
   return (

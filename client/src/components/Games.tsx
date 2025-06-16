@@ -4,11 +4,10 @@ import TicTacToe from './TicTacToe';
 import { Game } from '../types';
 
 type GamesProps = {
-  games: Game[]
-}
+  games: Game[];
+};
 
-const Games = ({games = []}: GamesProps) => {
-
+const Games = ({ games = [] }: GamesProps) => {
   const [page, setPage] = useState<string>('');
 
   const renderPage = () => {
@@ -26,14 +25,31 @@ const Games = ({games = []}: GamesProps) => {
     <>
       <h1>Games</h1>
       {page === '' ? (
-          <>
-  <button onClick={() => setPage('hangman')}>Hangman</button>
-  <button onClick={() => setPage('tictactoe')}>Tic Tac Toe</button>
-          </>
-      ): (<button onClick={() => setPage('')}>Choose a different Game</button>)}
+        <>
+          <button
+            aria-label="Start Hangman game"
+            onClick={() => setPage('hangman')}
+          >
+            Hangman
+          </button>
+          <button
+            aria-label="Start Tic Tac Toe game"
+            onClick={() => setPage('tictactoe')}
+          >
+            Tic Tac Toe
+          </button>
+        </>
+      ) : (
+        <button
+          aria-label="Go back to game selection"
+          onClick={() => setPage('')}
+        >
+          Choose a different Game
+        </button>
+      )}
       {renderPage()}
     </>
-  )
-}
+  );
+};
 
 export default Games;
