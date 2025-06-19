@@ -23,7 +23,7 @@ const Games = ({ games = [] }: GamesProps) => {
 
   return (
     <>
-      <h1>Games</h1>
+      {page === '' && <h1>Games</h1>}
       {page === '' ? (
         <>
           <button
