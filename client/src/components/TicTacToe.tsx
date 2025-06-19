@@ -69,7 +69,6 @@ const TicTacToe = () => {
       ) : (
         <p>{`Player ${isXNext ? 'X' : 'O'} is up.`}</p>
       )}
-      <button onClick={() => resetGame()}>Reset Game</button>
       <div className="game-board">
         {boardValueArray.map((cellValue, index) => {
           return (
@@ -83,6 +82,7 @@ const TicTacToe = () => {
           );
         })}
       </div>
+      <button onClick={() => resetGame()}>Reset Game</button>
     </>
   );
 };

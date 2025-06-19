@@ -23,7 +23,7 @@ const Games = ({ games = [] }: GamesProps) => {
 
   return (
     <>
-      <h1>Games</h1>
+      {page === '' && <h1>Games</h1>}
       {page === '' ? (
         <>
           <button
@@ -40,14 +40,16 @@ const Games = ({ games = [] }: GamesProps) => {
           </button>
         </>
       ) : (
-        <button
-          aria-label="Go back to game selection"
-          onClick={() => setPage('')}
-        >
-          Choose a different Game
-        </button>
+        <>
+          {renderPage()}
+          <button
+            aria-label="Go back to game selection"
+            onClick={() => setPage('')}
+          >
+            {`< Choose a different Game`}
+          </button>
+        </>
       )}
-      {renderPage()}
     </>
   );
 };
