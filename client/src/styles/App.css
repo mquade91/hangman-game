@@ -37,8 +37,14 @@ button {
   font-size: 16px;
   cursor: pointer;
   transition: background 0.3s ease;
-  width: 100%;
+  width: 20%;
+  min-width: 150px;
 }
+
+button:hover {
+  background-color: var(--sea);
+}
+
 
 input {
   width: 100%;
