@@ -8,9 +8,6 @@ import { fetchGames } from './api/gameApi';
 
 function App() {
   const [games, setGames] = useState<Game[]>([]);
-
-
-
   return (
     <div className="App">
       <Games games={games} />

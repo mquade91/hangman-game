@@ -14,6 +14,6 @@ export const fetchGames = async (id?: string): Promise<Game[]> => {
     });
     return response.data;
   } catch (error: any) {
-    throw new Error(`Error calling Lambda function: ${error.message}`);
+    throw new Error(`Error fetching game information: ${error.message}`);
   }
 };

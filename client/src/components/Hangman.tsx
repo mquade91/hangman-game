@@ -32,6 +32,23 @@ const Hangman = () => {
     fetchData();
   }, []);
 
+  const checkGameSuccess = () => {
+    const hasGuessedAllLetters = arrayOfWord.every((letter) =>
+      guessList.includes(letter)
+    );
+    if (hasGuessedAllLetters) {
+      setError('Congratulations! You guessed the word!');
+      setTries(0); // End the game
+    } else if (tries <= 0) {
+      setError(`Game Over! The word was: ${word}`);
+      setTries(0); // End the game
+    }
+  };
+
+  useEffect(() => {
+    checkGameSuccess();
+  }, [guessList, tries]);
+
   const checkValue = () => {
     if (currentGuess && currentGuess !== '') {
       const hasNotBeenGuessed = !guessList.includes(currentGuess);
@@ -42,7 +59,7 @@ const Hangman = () => {
       } else {
         if (hasNotBeenGuessed) {
           setGuessList([...guessList, currentGuess]);
-          setTries(tries - 1);
+          setTries(tries - 1);  
         } else {
           setError(`You already guessed letter ${currentGuess}`);
         }
