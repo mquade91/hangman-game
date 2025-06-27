@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import '../styles/tictactoe.css';
+import { getAIMove } from '../api/gameApi';
 
 const TicTacToe = () => {
   const [boardValueArray, setBoardValues] = useState(Array(9).fill(null));
@@ -8,29 +9,45 @@ const TicTacToe = () => {
     ''
   );
   const [error, setError] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(false); // Add loading state
 
   useEffect(() => {
+    // reset state when game mode changes
     setError('');
+    setBoardValues(Array(9).fill(null));
+    setIsXNext(true);
   }, [gameMode]);
 
   useEffect(() => {
     if (gameMode !== 'AGAINST_AI') return;
-    if (isXNext || winningLetter) return;
+    const winningLetter = calculateWinner().letter;
+    const boardIsFull = boardValueArray.every((cell) => cell !== null);
+    if (isXNext || winningLetter || boardIsFull) return;
+    const aiTurn = async () => {
+      setLoading(true); // Set loading to true before AI move
+      try {
+        const move = await getAIMove(boardValueArray);
+        console.log(move);
+        if (typeof move !== 'number' || boardValueArray[move]) {
+          setError('Invalid AI move received.');
+          setLoading(false); // Reset loading state
+          return;
+        }
+        const newBoard = [...boardValueArray];
+        newBoard[move] = 'O'; // AI plays as 'O'
+        setBoardValues(newBoard);
+        setIsXNext(true);
+      } catch (err) {
+        setError('Failed to get move from AI');
+        console.error(err);
+      } finally {
+        setLoading(false); // Reset loading state after AI move
+      }
+    };
 
     const timeout = setTimeout(() => {
-      const emptyCells = boardValueArray
-        .map((val, idx) => (val === null ? idx : null))
-        .filter((v) => v !== null) as number[];
-
-      if (emptyCells.length === 0) return;
-
-      const aiMove = emptyCells[Math.floor(Math.random() * emptyCells.length)];
-      const newBoard = [...boardValueArray];
-      newBoard[aiMove] = 'O';
-      setBoardValues(newBoard);
-      setIsXNext(true);
+      aiTurn();
     }, 500);
-
     return () => clearTimeout(timeout);
   }, [isXNext, gameMode, boardValueArray]);
 
@@ -93,6 +110,7 @@ const TicTacToe = () => {
   };
 
   const winningLetter = calculateWinner().letter;
+  const boardIsFull = boardValueArray.every((cell) => cell !== null);
 
   const setClassNameForCell = (cellIndex: number) => {
     return calculateWinner().cells.includes(cellIndex) ? 'cell winner' : 'cell';
@@ -120,13 +138,17 @@ const TicTacToe = () => {
           <button onClick={() => setGameMode('')}>Change Game mode?</button>
         </>
       )}
-
       {gameMode === '' ? null : winningLetter ? (
         <p> {`Player ${winningLetter} is Winner!`}</p>
       ) : (
-        <p>{`Player ${isXNext ? 'X' : 'O'} is up.`}</p>
+        <p>
+          {boardIsFull
+            ? 'The game is a draw, reset and play again.'
+            : `Player ${isXNext ? 'X' : 'O'} is up.`}
+        </p>
       )}
       {error && <p className="error">{error}</p>}
+      {loading && <p>AI is thinking...</p>} {/* Display loading message */}
       <>
         <div className="game-board">
           {boardValueArray.map((cellValue, index) => {

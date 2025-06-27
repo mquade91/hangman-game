@@ -1,8 +1,8 @@
-# Over-engineered Hangman Game using React, TypeScript & AWS Amplify
+# Over-engineered Hangman and TicTacToe games 
 
-This project is an over-engineered game application built using **React**, **TypeScript**, and **AWS Amplify**. It includes two games: **Hangman** and **Tic Tac Toe**, with a responsive UI and modular codebase.
+This project is an over-engineered game application built using **React**, **TypeScript**, **AWS (Amplify, Lambda, S3, DynamoDB)** and **gpt-4.1-nano via OpenAI API**. It includes two games: **Hangman** and **Tic Tac Toe**, with a responsive UI and modular codebase.
 
-- [Deployed via AWS Amplify here](https://master.dr7v6489vrmgm.amplifyapp.com/)
+- [DevBoredGames.com](https://www.devboredgames.com/)
 
 ---
 
@@ -10,8 +10,8 @@ This project is an over-engineered game application built using **React**, **Typ
 
 - **Games**:
   - Hangman: A word-guessing game with error handling and reset functionality.
-  - Tic Tac Toe: A two-player game with winner detection and reset functionality.
-- **API Integration**: Fetches game data from an AWS Lambda function via an API Gateway.
+  - Tic Tac Toe: A two-player game with winner detection and reset functionality. Computer mode that uses logic form AWS Lambda function and Open AI API (`gpt-4.1-nano`)
+- **API Integration**: Fetches game data and calls OpenAI API from an AWS Lambda function via an API Gateway.
 - **Error Handling**: Displays user-friendly error messages for invalid inputs or API failures.
 - **Testing**: Includes unit tests for the `Games` component using Jest and React Testing Library.
 - **Styling**: Custom CSS for a visually appealing UI.
@@ -41,7 +41,7 @@ Your app is ready to be deployed!
 
 ## API Integration
 
-The game data is fetched from an AWS Lambda function via the `fetchGames` function. It uses Axios to make GET requests to the API endpoint.
+The game data is fetched from an AWS Lambda function via the `fetchGames` & `getAiMove()` functions. It uses Axios to make GET requests to the API endpoint.
 
 ---
 
@@ -63,9 +63,10 @@ The project is deployed using **AWS Amplify**. The build configuration is define
 
 - Add more games to the platform.
 - Improve the Hangman game with dynamic word fetching.
-- Enhance Tic Tac Toe with AI for single-player mode.
 - Add integration tests for API calls.
 - Add unit testing.
+- convert Lambda to Typescript
+- add unit tests for Lambda
 ---
 ## Project Structure
 
