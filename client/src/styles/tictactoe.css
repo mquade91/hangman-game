@@ -33,8 +33,3 @@
 input:hover{
   background-color: #e0e0e0;
 }
-
-.button-container {
-  display: flex;
-  justify-content: space-between;
-}

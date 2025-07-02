@@ -119,10 +119,9 @@ const TicTacToe = () => {
   return (
     <>
       <h1>'Tic Tac Toe'</h1>
-      <h3>Try to get 3 in a row, X is first</h3>
+      <h3>Try to get 3 in a row</h3>
       {gameMode === '' ? (
         <>
-          <div className="button-container">
             <h4>Choose Game Mode: </h4>
             <button onClick={() => setGameMode('AGAINST_AI')}>
               Versus Computer
@@ -130,7 +129,6 @@ const TicTacToe = () => {
             <button onClick={() => setGameMode('TWO_PLAYER')}>
               Two Player
             </button>
-          </div>
         </>
       ) : (
         <>
