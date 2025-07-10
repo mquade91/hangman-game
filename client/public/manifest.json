@@ -1,6 +1,6 @@
 {
   "short_name": "Game",
-  "name": "Games",
+  "name": "DevBoredGames",
   "icons": [],
   "start_url": ".",
   "display": "standalone",

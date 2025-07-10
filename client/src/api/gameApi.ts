@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { Game } from '../types';
 
-export const fetchGames = async (id?: string): Promise<Game[]> => {
+export const fetchGames = async (id?: string): Promise<Game[] | Game> => {
   try {
     const url = id
       ? `https://rr5zhoav94.execute-api.us-east-1.amazonaws.com/production/game/?id=${id}`

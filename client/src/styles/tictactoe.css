@@ -7,7 +7,6 @@
   padding: 5px;
   border-radius: 12px;
   box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-
 }
 
 .cell {
@@ -27,7 +26,7 @@
 }
 
 .cell.winner {
-  background-color: yellow;
+  background-color: rgb(12, 234, 208);
 }
 
 input:hover{

@@ -2,19 +2,22 @@
 import React, { useEffect, useState } from 'react';
 import ErrorField from './ErrorField';
 import '../styles/App.css';
-import { Game } from '../types';
+import { Game, Choice } from '../types';
 import { fetchGames } from '../api/gameApi';
 import { GAMES } from '../constants';
-
-type HangmanProps = {
-  gameConfig: Game;
-};
 
 const Hangman = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
+  const [words, setWords] = useState<Array<Choice>>([
+    {
+      description: 'Name of the game',
+      word: 'Hangman',
+    },
+  ]);
 
-  const word = 'hangman';
+  const word = words[0].word.toUpperCase();
+
   const arrayOfWord = word.toUpperCase().split('');
   const [tries, setTries] = useState<number>(7);
   const [guessList, setGuessList] = useState<string[]>([]);
@@ -25,6 +28,7 @@ const Hangman = () => {
       try {
         const gameInfo = await fetchGames(GAMES.HANGMAN);
         console.log('Game Info:', gameInfo);
+        setWords((gameInfo as Game).choices);
       } catch (err: any) {
         setError(`Failed to fetch games: ${err.message}`);
       }
@@ -59,7 +63,7 @@ const Hangman = () => {
       } else {
         if (hasNotBeenGuessed) {
           setGuessList([...guessList, currentGuess]);
-          setTries(tries - 1);  
+          setTries(tries - 1);
         } else {
           setError(`You already guessed letter ${currentGuess}`);
         }
@@ -80,16 +84,22 @@ const Hangman = () => {
     }
   };
 
-  const resetValue = () => {
+  const resetGame = () => {
     setTries(7);
     setGuessList([]);
     setError('');
   };
 
+  const newWord = () => {
+    const [first, ...rest] = words;
+    setWords([...rest, first]);
+    resetGame();
+  };
+
   return (
     <>
       <h1>Hangman</h1>
-      <h4>Hint: 'Name of the game'</h4>
+      <h4>Hint: {words[0].description}</h4>
       <div className="correct-container">
         {arrayOfWord.map((letter, index) => {
           return (
@@ -125,7 +135,8 @@ const Hangman = () => {
       ) : (
         <p>Game Over</p>
       )}
-      <button onClick={() => resetValue()}>Reset game</button>
+      <button onClick={() => resetGame()}>Reset game</button>
+      <button onClick={() => newWord()}>Different Word</button>
     </>
   );
 };
