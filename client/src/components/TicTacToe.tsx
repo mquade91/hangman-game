@@ -27,7 +27,6 @@ const TicTacToe = () => {
       setLoading(true); // Set loading to true before AI move
       try {
         const move = await getAIMove(boardValueArray);
-        console.log(move);
         if (typeof move !== 'number' || boardValueArray[move]) {
           setError('Invalid AI move received.');
           setLoading(false); // Reset loading state
@@ -119,7 +118,7 @@ const TicTacToe = () => {
   return (
     <>
       <h1>'Tic Tac Toe'</h1>
-      <h3>Try to get 3 in a row, X is first</h3>
+      <h5>Try to get 3 in a row, X is first</h5>
       {gameMode === '' ? (
         <>
           <div className="button-container">
