@@ -51,6 +51,7 @@ const TicTacToe = () => {
   }, [isXNext, gameMode, boardValueArray]);
 
   const onCellClick = (index: number) => {
+    if (loading) return; // Prevent clicks while AI is thinking
     setError(''); // reset error message on each click
     if (gameMode === '') {
       setError('Please choose a game mode first');
@@ -156,6 +157,7 @@ const TicTacToe = () => {
                 key={cellValue + index}
                 className={setClassNameForCell(index)}
                 onClick={() => onCellClick(index)}
+                role="button"
               >
                 {cellValue}
               </div>
