@@ -118,7 +118,7 @@ const TicTacToe = () => {
   return (
     <>
       <h1>'Tic Tac Toe'</h1>
-      <h3>Try to get 3 in a row, X is first</h3>
+      <h5>Try to get 3 in a row, X is first</h5>
       {gameMode === '' ? (
         <>
           <div className="button-container">
