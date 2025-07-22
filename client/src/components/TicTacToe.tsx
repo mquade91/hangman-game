@@ -27,7 +27,6 @@ const TicTacToe = () => {
       setLoading(true); // Set loading to true before AI move
       try {
         const move = await getAIMove(boardValueArray);
-        console.log(move);
         if (typeof move !== 'number' || boardValueArray[move]) {
           setError('Invalid AI move received.');
           setLoading(false); // Reset loading state

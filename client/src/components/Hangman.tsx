@@ -27,7 +27,6 @@ const Hangman = () => {
     const fetchData = async () => {
       try {
         const gameInfo = await fetchGames(GAMES.HANGMAN);
-        console.log('Game Info:', gameInfo);
         setWords((gameInfo as Game).choices);
       } catch (err: any) {
         setError(`Failed to fetch games: ${err.message}`);
