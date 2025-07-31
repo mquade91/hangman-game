@@ -8,10 +8,6 @@ body {
 
 h1 {
   color: var(--text);
-    text-shadow:
-    0 0 2px #00ff48,
-    0 0 8px #6ce69f,
-    0 0 12px #09ff00;
 }
 
 .App {
