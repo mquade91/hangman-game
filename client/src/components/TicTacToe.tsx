@@ -2,8 +2,11 @@ import { useEffect, useState } from 'react';
 import '../styles/tictactoe.css';
 import { getAIMove } from '../api/gameApi';
 
+
 const TicTacToe = () => {
-  const [boardValueArray, setBoardValues] = useState(Array(9).fill(null));
+  const [boardValueArray, setBoardValues] = useState<('X' | 'O')[]>(
+    Array(9).fill(null)
+  );
   const [isXNext, setIsXNext] = useState<boolean>(true);
   const [gameMode, setGameMode] = useState<'AGAINST_AI' | 'TWO_PLAYER' | ''>(
     ''

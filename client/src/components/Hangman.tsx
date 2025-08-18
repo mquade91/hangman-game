@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import React, { useEffect, useState } from 'react';
 import ErrorField from './ErrorField';
 import '../styles/App.css';
@@ -71,8 +70,12 @@ const Hangman = () => {
       setError('Your guess can not be blank');
     }
     setCurrentGuess('');
-    // @ts-ignore
-    document.getElementById('guess-input').value = '';
+    const guessInput = document.getElementById(
+      'guess-input'
+    ) as HTMLInputElement | null;
+    if (guessInput) {
+      guessInput.value = '';
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
