@@ -6,7 +6,6 @@ import { fetchGames } from '../api/gameApi';
 import { GAMES } from '../constants';
 
 const Hangman = () => {
-  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
   const [words, setWords] = useState<Array<Choice>>([
     {
