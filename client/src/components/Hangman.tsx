@@ -104,9 +104,9 @@ const Hangman = () => {
       <div className="correct-container">
         {arrayOfWord.map((letter, index) => {
           return (
-            <div key={`guess${letter}${index}`} className="correct-letter">
+            <span key={`guess${letter}${index}`} className="correct-letter">
               {guessList.includes(letter) ? letter : ''}
-            </div>
+            </span>
           );
         })}
       </div>
