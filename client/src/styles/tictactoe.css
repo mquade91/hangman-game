@@ -26,7 +26,8 @@
 }
 
 .cell.winner {
-  background-color: rgb(12, 234, 208);
+  border: 0.75rem solid var(--text);
+  border-radius: 1rem;
 }
 
 input:hover{

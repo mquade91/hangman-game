@@ -25,6 +25,7 @@ h1 {
   font-weight: 600;
 }
 
+
 button {
   background-color: black;
   color: red;
@@ -70,11 +71,8 @@ input {
   transition: background-color 0.3s ease;
 }
 
-@media (max-width: 767px) {
-  .correct-letter {
-    width: 1.5rem;
-  }
-}
+
+
 
 .guessed-letter {
   width: 2.5rem;
@@ -83,5 +81,21 @@ input {
   user-select: none;
 }
 
-
+@media screen and (max-width: 767px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+  h4, h5 {
+    font-size: 0.75rem;
+  }
+    .correct-letter {
+    width: 1.5rem;
+  }
+  .hide-on-mobile {
+    display: none;
+  }
+  button {
+    width: 225px;
+  }
+}
 
