@@ -37,13 +37,12 @@ input:hover{
 .button-container {
   display: flex;
   justify-content: space-between;
+  flex-direction: column;
+  gap: 10px;
 }
 
 @media (max-width: 767px) {
   .button-container {
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 10px;
     align-items: center;
   }
 }

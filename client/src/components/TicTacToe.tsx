@@ -125,22 +125,24 @@ const TicTacToe = () => {
     <>
       <h1>'Tic Tac Toe'</h1>
       <h5 className="hide-on-mobile">Try to get 3 in a row, X is first</h5>
-      {gameMode === '' ? (
-        <div className="button-container">
-          <h4>Choose Game Mode: </h4>
-          <button onClick={() => setGameMode(GAME_MODES.AGAINST_AI)}>
-            Versus Computer
-          </button>
-          <button onClick={() => setGameMode(GAME_MODES.TWO_PLAYER)}>
-            Two Player
-          </button>
-        </div>
-      ) : (
-        <>
-          <h4>{`Game mode: ${gameMode === GAME_MODES.TWO_PLAYER ? 'Two player' : 'vs Computer'} `}</h4>
-          <button onClick={() => setGameMode('')}>Change Game mode?</button>
-        </>
-      )}
+      <div className="button-container">
+        {gameMode === '' ? (
+          <>
+            <h4>Choose Game Mode: </h4>
+            <button onClick={() => setGameMode(GAME_MODES.AGAINST_AI)}>
+              Versus Computer
+            </button>
+            <button onClick={() => setGameMode(GAME_MODES.TWO_PLAYER)}>
+              Two Player
+            </button>
+          </>
+        ) : (
+          <>
+            <h4>{`Game mode: ${gameMode === GAME_MODES.TWO_PLAYER ? 'Two player' : 'vs Computer'} `}</h4>
+            <button onClick={() => setGameMode('')}>Change Game mode?</button>
+          </>
+        )}
+      </div>
       {gameMode === '' ? null : winningLetter ? (
         <p> {`Player ${winningLetter} is Winner!`}</p>
       ) : (
