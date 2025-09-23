@@ -1,15 +1,19 @@
 import { useEffect, useState } from 'react';
 import '../styles/tictactoe.css';
 import { getAIMove } from '../api/gameApi';
+import { GAME_MODES } from '../constants';
 
 const TicTacToe = () => {
-  const [boardValueArray, setBoardValues] = useState(Array(9).fill(null));
-  const [isXNext, setIsXNext] = useState<boolean>(true);
-  const [gameMode, setGameMode] = useState<'AGAINST_AI' | 'TWO_PLAYER' | ''>(
-    ''
+  const [boardValueArray, setBoardValues] = useState<('X' | 'O')[]>(
+    Array(9).fill(null)
   );
+  const [isXNext, setIsXNext] = useState<boolean>(true);
+  const [gameMode, setGameMode] =
+    useState<(typeof GAME_MODES)[keyof typeof GAME_MODES]>('');
   const [error, setError] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false); // Add loading state
+
+  const boardIsFull = boardValueArray.every((cell) => cell !== null);
 
   useEffect(() => {
     // reset state when game mode changes
@@ -51,9 +55,13 @@ const TicTacToe = () => {
   }, [isXNext, gameMode, boardValueArray]);
 
   const onCellClick = (index: number) => {
+    if (loading) return; // Prevent clicks while AI is thinking
     setError(''); // reset error message on each click
     if (gameMode === '') {
       setError('Please choose a game mode first');
+      return;
+    }
+    if (boardIsFull || calculateWinner().letter) {
       return;
     }
     // check if value for this cell already exists
@@ -65,9 +73,9 @@ const TicTacToe = () => {
       // assignValue to board
       newBoard[index] = isXNext ? 'X' : 'O';
       setBoardValues(newBoard);
-      if (gameMode === 'TWO_PLAYER') {
+      if (gameMode === GAME_MODES.TWO_PLAYER) {
         setIsXNext(!isXNext);
-      } else if (gameMode === 'AGAINST_AI') {
+      } else if (gameMode === GAME_MODES.AGAINST_AI) {
         setIsXNext(false); // player moved, AI’s turn will run in useEffect
       }
     }
@@ -101,15 +109,13 @@ const TicTacToe = () => {
     });
     return { letter: winningLetter, cells: winningCells };
   };
+  const winningLetter = calculateWinner().letter;
 
   const resetGame = () => {
     setBoardValues(Array(9).fill(null));
     setIsXNext(true);
     setError('');
   };
-
-  const winningLetter = calculateWinner().letter;
-  const boardIsFull = boardValueArray.every((cell) => cell !== null);
 
   const setClassNameForCell = (cellIndex: number) => {
     return calculateWinner().cells.includes(cellIndex) ? 'cell winner' : 'cell';
@@ -118,25 +124,25 @@ const TicTacToe = () => {
   return (
     <>
       <h1>'Tic Tac Toe'</h1>
-      <h5>Try to get 3 in a row, X is first</h5>
-      {gameMode === '' ? (
-        <>
-          <div className="button-container">
+      <h5 className="hide-on-mobile">Try to get 3 in a row, X is first</h5>
+      <div className="button-container">
+        {gameMode === '' ? (
+          <>
             <h4>Choose Game Mode: </h4>
-            <button onClick={() => setGameMode('AGAINST_AI')}>
+            <button onClick={() => setGameMode(GAME_MODES.AGAINST_AI)}>
               Versus Computer
             </button>
-            <button onClick={() => setGameMode('TWO_PLAYER')}>
+            <button onClick={() => setGameMode(GAME_MODES.TWO_PLAYER)}>
               Two Player
             </button>
-          </div>
-        </>
-      ) : (
-        <>
-          <h4>{`Game mode: ${gameMode === 'TWO_PLAYER' ? 'Two player' : 'vs Computer'} `}</h4>
-          <button onClick={() => setGameMode('')}>Change Game mode?</button>
-        </>
-      )}
+          </>
+        ) : (
+          <>
+            <h4>{`Game mode: ${gameMode === GAME_MODES.TWO_PLAYER ? 'Two player' : 'vs Computer'} `}</h4>
+            <button onClick={() => setGameMode('')}>Change Game mode?</button>
+          </>
+        )}
+      </div>
       {gameMode === '' ? null : winningLetter ? (
         <p> {`Player ${winningLetter} is Winner!`}</p>
       ) : (
@@ -156,6 +162,7 @@ const TicTacToe = () => {
                 key={cellValue + index}
                 className={setClassNameForCell(index)}
                 onClick={() => onCellClick(index)}
+                role="button"
               >
                 {cellValue}
               </div>

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import React, { useEffect, useState } from 'react';
 import ErrorField from './ErrorField';
 import '../styles/App.css';
@@ -7,7 +6,6 @@ import { fetchGames } from '../api/gameApi';
 import { GAMES } from '../constants';
 
 const Hangman = () => {
-  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
   const [words, setWords] = useState<Array<Choice>>([
     {
@@ -71,8 +69,12 @@ const Hangman = () => {
       setError('Your guess can not be blank');
     }
     setCurrentGuess('');
-    // @ts-ignore
-    document.getElementById('guess-input').value = '';
+    const guessInput = document.getElementById(
+      'guess-input'
+    ) as HTMLInputElement | null;
+    if (guessInput) {
+      guessInput.value = '';
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -102,9 +104,9 @@ const Hangman = () => {
       <div className="correct-container">
         {arrayOfWord.map((letter, index) => {
           return (
-            <div key={`guess${letter}${index}`} className="correct-letter">
+            <span key={`guess${letter}${index}`} className="correct-letter">
               {guessList.includes(letter) ? letter : ''}
-            </div>
+            </span>
           );
         })}
       </div>
